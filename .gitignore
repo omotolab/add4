@@ -92,3 +92,6 @@ sw.*
 
 # Vercel
 .vercel
+
+# Nuxt3
+.output

@@ -1,6 +1,7 @@
 <script setup>
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { PhotoIcon } from '@heroicons/vue/24/solid'
+ 
 const location = ref(null)
 onMounted(() => {
   location.value = window.location.hostname

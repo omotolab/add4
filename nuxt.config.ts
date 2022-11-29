@@ -1,6 +1,4 @@
-import { defineNuxtConfig } from 'nuxt3'
-
-// https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     srcDir: "xyz",
     css: ['uikit/dist/css/uikit.min.css']
@@ -8,3 +6,4 @@ export default defineNuxtConfig({
         'nuxt-windicss'
     ], */
 })
+

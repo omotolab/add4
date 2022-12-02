@@ -19,3 +19,8 @@ const props = defineProps({
         </li>
     </ul>
 </template>
+<style>
+.uk-list>*>ul, .uk-list>:nth-child(n+2) {
+    margin-top: 4px;
+}
+</style>

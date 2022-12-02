@@ -32,17 +32,33 @@ function sign() {
             <div>
                 <ul class="uk-list uk-list-small">
                     <li>
-                        <div class="bg-white p-2 rounded shadow text-center">
-                            <div>{{ host }}</div>
-                        </div>
-                    </li>
-                    <li>
-                        <ul class="uk-iconnav">
+                        <ul class="uk-iconnav" uk-height-match>
+                            <li class="uk-width-expand">
+                                <div class="bg-white p-2 rounded shadow text-center">{{ host }}</div>
+                            </li>
+                            <li>
+                                <hr class="uk-divider-vertical" />
+                            </li>
                             <li>
                                 <div class="bg-white p-2 rounded shadow text-center">{{ port }}</div>
                             </li>
+                           
+                        </ul>
+                    </li>
+                    <li><hr /></li>
+                    <li>
+                        <ul class="uk-iconnav" uk-height-match>
                             <li>
                                 <div class="bg-white p-2 rounded shadow text-center">{{ $route.params.stream }}</div>
+                            </li>
+                            <li>
+                                <hr class="uk-divider-vertical" />
+                            </li>
+                            <li class="uk-width-expand">
+                                <div class="bg-white p-2 rounded shadow text-center">{{ $route.params.signal }}</div>
+                            </li>
+                            <li>
+                                <hr class="uk-divider-vertical" />
                             </li>
                             <li>
                                 <div class="bg-white p-2 rounded shadow text-center">{{ $route.params.signal }}</div>
@@ -101,6 +117,22 @@ function sign() {
 </template>
 <style>
 /* Browser specific (not valid) styles to make preformatted text wrap */
+.uk-divider-vertical {
+    width: -moz-max-content;
+    width: max-content;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 1px solid #e5e5e5;
+}
+
+.uk-list>*>ul, .uk-list>:nth-child(n+2) {
+    margin-top: 4px;
+}
+
+.uk-iconnav>:nth-child(n+2) {
+    padding-left: 4px;
+}
 
 pre {
     white-space: pre-wrap;

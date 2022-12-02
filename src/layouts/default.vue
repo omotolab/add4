@@ -10,7 +10,7 @@ const name = 'Omotola Bolarin'
 
 const pass = btoa(JSON.stringify({ uuid, time, mail, name }))
 const code = href + `?pass=${pass}`
-
+const text = "https://www." + window.location.hostname + "/" + window.location.path
 // const hash = self.crypto.getHashes();
 // console.log('hash', self.crypto.subtle.encrypt())
 

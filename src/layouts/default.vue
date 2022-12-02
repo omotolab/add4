@@ -1,6 +1,6 @@
 <script setup>
 const href = window.location.href
-const host = window.location.host
+const host = window.location.hostname
 const port = window.location.port
 
 const uuid = self.crypto.randomUUID();
@@ -10,7 +10,7 @@ const name = 'Omotola Bolarin'
 
 const pass = btoa(JSON.stringify({ uuid, time, mail, name }))
 const code = href + `?pass=${pass}`
-const text = "https://www." + window.location.hostname + "/" + window.location.path
+
 // const hash = self.crypto.getHashes();
 // console.log('hash', self.crypto.subtle.encrypt())
 
@@ -28,52 +28,75 @@ function sign() {
 </script>
 <template>
     <cover>
-        <ul class="uk-list">
-            <!--             <li>
-                <div class="bg-white p-2 rounded shadow text-center">
-                    <div>{{ host }}</div>
-                    <div>{{ $route.fullPath }}</div>
-                </div>
-            </li> -->
-            <li>
-                <div class="bg-white p-2 rounded shadow text-center ">
-                    <div>{{ $route.params.stream }}</div>
-                    <div class="uk-text-meta w-75">{{ text }}</div>
-                    <use-qrcode :text="text" class="w-75 h-75" />
-                </div>
-            </li>
-            <li>
-                <div class="bg-white p-2 rounded shadow text-center ">
-
-                    <template v-if="$route.params.stream === 'coin'">
-
-                        <template v-if="$route.params.signal">
-                            <div>{{ $route.params.stream }}</div>
-                            <div class="uk-text-meta w-75">{{ $route.params.signal }}</div>
-                            <use-qrcode :text="code" class="w-75 h-75" />
-                        </template>
-                        <template v-else>
-                            <div>{{ $route.fullPath }}</div>
-                        </template>
-                    </template>
-                    <template v-else>
-                        <div>{{ host }}</div>
-                        <div>{{ $route.fullPath }}</div>
-                    </template>
-                </div>
-            </li>
-            <li v-if="Object.entries($route.query).length">
-                <ul class="uk-list">
-                    <li v-for="entry in Object.entries($route.query)">
-                        <pre
-                            class="w-75 h-25 overflow-auto text-xs"><code style="white-space: pre-wrap">{{ entry[1] }}</code></pre>
+        <div class="uk-section">
+            <div>
+                <ul class="uk-list uk-list-small">
+                    <li>
+                        <div class="bg-white p-2 rounded shadow text-center">
+                            <div>{{ host }}</div>
+                        </div>
                     </li>
-                </ul>
-                <!-- <div class=" bg-white p-2 rounded shadow text-center ">
+                    <li>
+                        <ul class="uk-iconnav">
+                            <li>
+                                <div class="bg-white p-2 rounded shadow text-center">{{ port }}</div>
+                            </li>
+                            <li>
+                                <div class="bg-white p-2 rounded shadow text-center">{{ $route.params.stream }}</div>
+                            </li>
+                            <li>
+                                <div class="bg-white p-2 rounded shadow text-center">{{ $route.params.signal }}</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <hr />
+                    </li>
+                    <li>
+                        <div class="bg-white p-2 rounded shadow text-center ">
+                            <!-- <div>{{ host }}</div> -->
+                            <div class="uk-text-meta w-75">
+                                <div>{{ $route.params.stream }}</div>
+                                <div>{{ $route.params.signal }}</div>
+                            </div>
+                            <use-qrcode :text="`${host}/`" class="w-75 h-75" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bg-white p-2 rounded shadow text-center ">
+
+                            <template v-if="$route.params.stream === 'coin'">
+
+                                <template v-if="$route.params.signal">
+                                    <div>{{ $route.params.stream }}</div>
+                                    <div class="uk-text-meta w-75">{{ $route.params.signal }}</div>
+                                    <use-qrcode :text="code" class="w-75 h-75" />
+                                </template>
+                                <template v-else>
+                                    <div>{{ $route.fullPath }}</div>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <div>{{ host }}</div>
+                                <div>{{ $route.fullPath }}</div>
+                            </template>
+                        </div>
+                    </li>
+                    <li v-if="Object.entries($route.query).length">
+                        <ul class="uk-list">
+                            <li v-for="entry in Object.entries($route.query)">
+                                <pre
+                                    class="w-75 h-25 overflow-auto text-xs"><code style="white-space: pre-wrap">{{ entry[1] }}</code></pre>
+                            </li>
+                        </ul>
+                        <!-- <div class=" bg-white p-2 rounded shadow text-center ">
                     <div >{{ Object.entries($route.query).length }}</div>
                 </div> -->
-            </li>
-        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </cover>
 </template>
 <style>

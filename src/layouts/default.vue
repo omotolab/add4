@@ -38,7 +38,7 @@ function sign() {
             <li>
                 <div class="bg-white p-2 rounded shadow text-center ">
                     <div>{{ $route.params.stream }}</div>
-                    <div class="uk-text-meta w-75">{{ $route.params.signal }}</div>
+                    <div class="uk-text-meta w-75">{{ text }}</div>
                     <use-qrcode :text="text" class="w-75 h-75" />
                 </div>
             </li>

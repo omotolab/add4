@@ -12,8 +12,7 @@ const pass = btoa(JSON.stringify({ uuid, time, mail, name }))
 const code = href + `?pass=${pass}`
 
 // const hash = self.crypto.getHashes();
-console.log('hash', self.crypto.subtle)
-
+// console.log('hash', self.crypto.subtle.encrypt())
 
 function sign() {
     const header = {
@@ -43,7 +42,7 @@ function sign() {
                         
                         <template v-if="$route.params.signal">
                             <div>{{ $route.params.stream }}</div>
-                            <div>{{ $route.params.signal }}</div>
+                            <div class="uk-text-meta">{{ $route.params.signal }}</div>
                             <use-qrcode :text="code"/>
                         </template>
                         <template v-else>

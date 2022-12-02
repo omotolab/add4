@@ -36,14 +36,14 @@ function sign() {
                 </div>
             </li> -->
             <li>
-                <div class="bg-white p-2 rounded shadow text-center w-75">
+                <div class="bg-white p-2 rounded shadow text-center ">
 
                     <template v-if="$route.params.stream === 'coin'">
                         
                         <template v-if="$route.params.signal">
                             <div>{{ $route.params.stream }}</div>
-                            <div class="uk-text-meta">{{ $route.params.signal }}</div>
-                            <use-qrcode :text="code"/>
+                            <div class="uk-text-meta w-75">{{ $route.params.signal }}</div>
+                            <use-qrcode :text="code" class="w-75 h-75"/>
                         </template>
                         <template v-else>
                             <div>{{ $route.fullPath }}</div>

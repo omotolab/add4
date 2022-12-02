@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+'https://rdwzcfpkxxbixgksgbch.supabase.co/storage/v1/object/public/@/thismedium.com/icon.png'
 export default defineNuxtConfig({
     ssr: false,
     srcDir: "src",
@@ -22,7 +24,7 @@ export default defineNuxtConfig({
         manifest: {
             icons: [
                 {
-                    src: !!process.env.SITE_FAVICON ? process.env.SITE_FAVICON : '//static.vecteezy.com/system/resources/previews/001/206/198/original/mountain-icon-png.png',
+                    src: !!process.env.SITE_FAVICON ? process.env.SITE_FAVICON : `//rdwzcfpkxxbixgksgbch.supabase.co/storage/v1/object/public/@/thismedium.com/icon.png`,
                     sizes: "72x72 96x96 128x128 256x256 512x512"
                 }
             ]

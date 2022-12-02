@@ -41,9 +41,10 @@ function onScanFailure(error) {
 </script>
 
 <template>
-    <div>
-        <img :src="qrcode" alt="QR Code" />
-        <!-- <div v-if="reader" :id="reader"></div>
-        <div>{{ decoded }}</div> -->
-    </div>
+    <img :src="qrcode" alt="QR Code" />
+    <!-- <div>
+        
+        <div v-if="reader" :id="reader"></div>
+        <div>{{ decoded }}</div>
+    </div> -->
 </template>

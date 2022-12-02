@@ -37,13 +37,20 @@ function sign() {
             </li> -->
             <li>
                 <div class="bg-white p-2 rounded shadow text-center ">
+                    <div>{{ $route.params.stream }}</div>
+                    <div class="uk-text-meta w-75">{{ $route.params.signal }}</div>
+                    <use-qrcode :text="href" class="w-75 h-75" />
+                </div>
+            </li>
+            <li>
+                <div class="bg-white p-2 rounded shadow text-center ">
 
                     <template v-if="$route.params.stream === 'coin'">
-                        
+
                         <template v-if="$route.params.signal">
                             <div>{{ $route.params.stream }}</div>
                             <div class="uk-text-meta w-75">{{ $route.params.signal }}</div>
-                            <use-qrcode :text="code" class="w-75 h-75"/>
+                            <use-qrcode :text="code" class="w-75 h-75" />
                         </template>
                         <template v-else>
                             <div>{{ $route.fullPath }}</div>
@@ -58,7 +65,8 @@ function sign() {
             <li v-if="Object.entries($route.query).length">
                 <ul class="uk-list">
                     <li v-for="entry in Object.entries($route.query)">
-                        <pre class="w-75 h-25 overflow-auto text-xs"><code style="white-space: pre-wrap">{{ entry[1] }}</code></pre>
+                        <pre
+                            class="w-75 h-25 overflow-auto text-xs"><code style="white-space: pre-wrap">{{ entry[1] }}</code></pre>
                     </li>
                 </ul>
                 <!-- <div class=" bg-white p-2 rounded shadow text-center ">
@@ -69,13 +77,18 @@ function sign() {
     </cover>
 </template>
 <style>
-/* Browser specific (not valid) styles to make preformatted text wrap */		
+/* Browser specific (not valid) styles to make preformatted text wrap */
 
 pre {
- white-space: pre-wrap;       /* css-3 */
- white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
- white-space: -pre-wrap;      /* Opera 4-6 */
- white-space: -o-pre-wrap;    /* Opera 7 */
- word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    white-space: pre-wrap;
+    /* css-3 */
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */
 }
 </style>

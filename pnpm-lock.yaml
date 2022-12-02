@@ -9,6 +9,7 @@ specifiers:
   '@vueuse/core': ^9.6.0
   '@vueuse/integrations': ^9.6.0
   '@vueuse/nuxt': ^9.6.0
+  html5-qrcode: ^2.3.4
   nuxt: 3.0.0
   nuxt-windicss: ^2.6.0
   qrcode: ^1.5.1
@@ -20,6 +21,7 @@ dependencies:
   '@headlessui/vue': 1.7.4_vue@3.2.45
   '@heroicons/vue': 2.0.13_vue@3.2.45
   '@vueuse/integrations': 9.6.0_qrcode@1.5.1+vue@3.2.45
+  html5-qrcode: 2.3.4
   qrcode: 1.5.1
   uikit: 3.15.14
 
@@ -2921,6 +2923,10 @@ packages:
   /html-void-elements/2.0.1:
     resolution: {integrity: sha512-0quDb7s97CfemeJAnW9wC0hw78MtW7NU3hqtCD75g2vFlDLt36llsYD7uB7SUzojLMP24N5IatXf7ylGXiGG9A==}
     dev: true
+
+  /html5-qrcode/2.3.4:
+    resolution: {integrity: sha512-VPZrOTG8XR9HmIAhSSiGtJVPErZxKy/DuGc9cPQLburCWZEbvxQGJP9y4K4P+8vdalLtYB/vM5YP1BdWQKZ8jQ==}
+    dev: false
 
   /htmlparser2/8.0.1:
     resolution: {integrity: sha512-4lVbmc1diZC7GUJQtRQ5yBAeUCL1exyMwmForWkRLnwyzWBFxN633SALPMGYaWZvKe9j1pRZJpauvmxENSp/EA==}

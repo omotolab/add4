@@ -1,3 +1,7 @@
 <template>
-    <div>signal</div>
+    <div>
+        <cover>
+            <use-qrcode />
+        </cover>
+    </div>
 </template>

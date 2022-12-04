@@ -218,13 +218,20 @@ function handleBanana() {
 }) */
 </script>
 <template>
-    <cover :class="`uk-background-${isDark ? 'secondary' : 'muted'} uk-position-fixed w-full`" v-if="name !== 'localhost'">
-        <div v-if="name === 'mini.ai'">
-            <view-focus>ai</view-focus>
+    <cover :class="`uk-background-${isDark ? 'secondary' : 'muted'} uk-position-fixed w-full`"
+        v-if="name !== 'localhost'">
+
+        <div v-if="name === 'thismedium.com'">
+            <div class="mix-blend-difference flex items-center h-full w-full justify-center">
+                        <div :style="`background-image: url('${icon.src}')`"
+                            :class="`bg-contain flex flex-column h-9 w-9 '`">
+                        </div>
+            </div>
         </div>
         <div v-else>
-            <bolt-icon class="h-20px"/>
+            <bolt-icon class="h-20px" />
         </div>
+
     </cover>
     <cover v-else class="bg-gray-300">
         <div class="w-250px">
@@ -262,7 +269,7 @@ function handleBanana() {
                             </div>
                         </div>
                     </li>
-                    
+
                 </ul>
                 <div class="mt-2 bg-gray-100 hover:bg-gray-50 shadow-xl cursor-pointer h-60px rounded  bg-gray-200 hover:bg-gray-100flex text-center flex items-center justify-center "
                     @click="handleBanana">
@@ -273,28 +280,29 @@ function handleBanana() {
                             <BoltSlashIcon v-else class="h-18px p-0.5 mr-1" />
                         </span> -->
                         <span v-for="(entry, e) in size" :key="e">
-                            
+
                             <!-- <BoltIcon v-if="Object.entries(load.items)[e]" class="h-18px p-0.5 mr-1"/>
                             <SunIcon v-else-if="Object.entries(tick.created)[e]" class="h-18px p-0.5 mr-1" /> -->
                             <!-- <BoltIconOutline  class="h-18px p-0.5 mr-1" />
                             <div>{{Object.entries(tick.created)[e]}}</div> -->
-                           
-                            <template v-if="Object.entries(tick.created)[e]" >
-                                <BoltIcon v-if="load.items[Object.entries(tick.created)[e][0]]" class="h-18px p-0.5 mr-1"/>
-                                <SunIcon v-else class="h-18px p-0.5 mr-1"/>
+
+                            <template v-if="Object.entries(tick.created)[e]">
+                                <BoltIcon v-if="load.items[Object.entries(tick.created)[e][0]]"
+                                    class="h-18px p-0.5 mr-1" />
+                                <SunIcon v-else class="h-18px p-0.5 mr-1" />
                             </template>
-                            
-                            
+
+
                             <BoltIconOutline v-else class="h-18px p-0.5" />
 
-                            
+
                         </span>
                     </div>
                     <div v-else class="mix-blend-difference flex items-center h-full w-full justify-center">
                         <span v-for="(entry, e) in size" :key="e">
-                            
+
                             <BoltIconOutline class="h-18px p-0.5" />
-                            
+
                         </span>
                     </div>
                 </div>
@@ -308,22 +316,24 @@ function handleBanana() {
                             <!-- <progress class="uk-progress shadow-inner" v-if="entry[1].finished"
                                 :value="(entry[1].finished.time - entry[1].clicked.time + entry[1].clicked.delay) / 1000"
                                 max="100"></progress> -->
-                            <progress class="uk-progress shadow-inner" :value="Object.entries(load.items).length" :max="size"></progress>
+                            <progress class="uk-progress shadow-inner" :value="Object.entries(load.items).length"
+                                :max="size"></progress>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center justify-between py-2" @click="handleBanana">
 
-                            <span class="uk-icon-button uk-button-secondary uk-border-rounded uk-flex uk-text-center uk-flex-center">
+                            <span
+                                class="uk-icon-button uk-button-secondary uk-border-rounded uk-flex uk-text-center uk-flex-center">
                                 <BoltIcon v-if="load.items" class="h-18px p-0.5" />
                                 <BoltSlashIcon v-else class="h-18px p-0.5 " />
                             </span>
-                            
+
 
                             <div class="flex items-center justify-center">
                                 <ul v-if="load.items" class="uk-list uk-list-collapse m-0">
                                     <li v-for="({ output, image_base64 }, o) in load.items" :key="o">
-                                       <div>{{image_base64}}</div>
+                                        <div>{{ image_base64 }}</div>
                                         <ChatBubbleBottomCenterTextIcon v-show="output" class="h-8 p-0.5" />
                                         <PhotoIcon v-show="image_base64" class="h-8 p-0.5" />
                                     </li>

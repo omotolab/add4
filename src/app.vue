@@ -317,7 +317,7 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-        <div v-if="name === '192.168.2.5' || name === '172.20.10.3' || 'onceupon.ai'">
+        <div v-else-if="name === '192.168.2.5' || name === '172.20.10.3' || 'onceupon.ai'">
             <ul class="uk-iconnav">
                 <!-- <li><view-focus>
                 <div class="mix-blend-difference flex items-center h-full w-full justify-center">

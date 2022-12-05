@@ -10,7 +10,9 @@ specifiers:
   '@vueuse/core': ^9.6.0
   '@vueuse/integrations': ^9.6.0
   '@vueuse/nuxt': ^9.6.0
+  dayjs: ^1.11.6
   html5-qrcode: ^2.3.4
+  jwt-decode: ^3.1.2
   nuxt: 3.0.0
   nuxt-windicss: ^2.6.0
   qrcode: ^1.5.1
@@ -21,8 +23,10 @@ dependencies:
   '@formkit/nuxt': 1.0.0-beta.12_vue@3.2.45
   '@headlessui/vue': 1.7.4_vue@3.2.45
   '@heroicons/vue': 2.0.13_vue@3.2.45
-  '@vueuse/integrations': 9.6.0_qrcode@1.5.1+vue@3.2.45
+  '@vueuse/integrations': 9.6.0_ffmx56dnt7mdjrwxaujf4gwxqi
+  dayjs: 1.11.6
   html5-qrcode: 2.3.4
+  jwt-decode: 3.1.2
   qrcode: 1.5.1
   uikit: 3.15.14
 
@@ -1151,7 +1155,7 @@ packages:
       vue: 3.2.45
     dev: true
 
-  /@vueuse/integrations/9.6.0_qrcode@1.5.1+vue@3.2.45:
+  /@vueuse/integrations/9.6.0_ffmx56dnt7mdjrwxaujf4gwxqi:
     resolution: {integrity: sha512-+rs2OWY/3spxoAGQMnlHQpxf8ErAYf4D1bT0aXaPnxphmtYgexm6KIjTFpBbcQnHwVi1g2ET1SJoQL16yDrgWA==}
     peerDependencies:
       async-validator: '*'
@@ -1191,6 +1195,7 @@ packages:
     dependencies:
       '@vueuse/core': 9.6.0_vue@3.2.45
       '@vueuse/shared': 9.6.0_vue@3.2.45
+      jwt-decode: 3.1.2
       qrcode: 1.5.1
       vue-demi: 0.13.11_vue@3.2.45
     transitivePeerDependencies:
@@ -1976,6 +1981,10 @@ packages:
     resolution: {integrity: sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==}
     engines: {node: '>= 12'}
     dev: true
+
+  /dayjs/1.11.6:
+    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -3305,6 +3314,10 @@ packages:
     optionalDependencies:
       graceful-fs: 4.2.10
     dev: true
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+    dev: false
 
   /kleur/4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}

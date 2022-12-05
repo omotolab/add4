@@ -23,7 +23,9 @@
     "@headlessui/vue": "^1.7.4",
     "@heroicons/vue": "^2.0.13",
     "@vueuse/integrations": "^9.6.0",
+    "dayjs": "^1.11.6",
     "html5-qrcode": "^2.3.4",
+    "jwt-decode": "^3.1.2",
     "qrcode": "^1.5.1",
     "uikit": "^3.15.14"
   }

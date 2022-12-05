@@ -3,9 +3,8 @@ import { BoltIcon, ArrowRightOnRectangleIcon, CubeTransparentIcon, SunIcon, Phot
 import { BoltIcon as BoltIconOutline } from '@heroicons/vue/24/outline'
 import { useStorage, useDark, useToggle } from '@vueuse/core'
 import { useJwt } from '@vueuse/integrations/useJwt'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from 'dayjs'
-
+import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
 
 const router = useRouter()

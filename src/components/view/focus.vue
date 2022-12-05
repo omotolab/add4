@@ -22,49 +22,53 @@
                             <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
                                 <slot name="header">Focus Mode</slot>
                             </DialogTitle>
-                        
-                             <template v-if="!isDone">
-                                <slot name="tick">
-                                    <div class="mt-2" >
-                                    
-                                    <p class="text-sm text-gray-500">
-                                        You are about to checkout. Once you have made your payment,
-                                        we will send you an email with all of the details of your order.
-                                       
-                                    </p>
-                                </div>
-                                </slot >
 
-                             </template>
-                             <template v-else>
+                            <template v-if="!isDone">
+                                <slot name="tick">
+                                    <div class="mt-2">
+
+                                        <p class="text-sm text-gray-500">
+                                            You are about to checkout. Once you have made your payment,
+                                            we will send you an email with all of the details of your order.
+
+                                        </p>
+                                    </div>
+                                </slot>
+
+                            </template>
+                            <template v-else>
                                 <slot name="tock">
-                                                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500">
-                                        Your payment has been successfully submitted. We’ve sent you
-                                        an email with all of the details of your order. You can also save the details now.
-                                    </p>
-                                </div>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500">
+                                            Your payment has been successfully submitted. We’ve sent you
+                                            an email with all of the details of your order. You can also save the
+                                            details now.
+                                        </p>
+                                    </div>
 
                                 </slot>
-                             </template>
-                                                             
-                                
-                               
-                        
+                            </template>
+
+
+
+
                             <ul class="uk-iconnav ">
                                 <li class="mt-4">
-                                    <button type="button"
-                                        class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                        >
-                                        <slot name="primary">Continue</slot>
-                                    </button>
+                                    <slot name="primary"><button type="button"
+                                            class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+
+                                            Continue
+                                        </button>
+
+                                    </slot>
+
                                 </li>
                                 <li class="mt-4">
                                     <button type="button"
                                         class="inline-flex justify-center rounded-md border border-transparent px-2 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                         @click="toggleDone">
                                         <slot name="secondary">
-                                            <CheckBadgeIcon class="h-20px"/>
+                                            <CheckBadgeIcon class="h-20px" />
 
                                         </slot>
                                     </button>
@@ -93,8 +97,9 @@ import { BoltIcon as BoltIconOutline } from '@heroicons/vue/24/outline'
 import { CheckBadgeIcon, CheckCircleIcon, ShieldCheckIcon, CheckIcon } from '@heroicons/vue/24/solid'
 
 const isOpen = ref(true)
-const isDone = ref(false)
-const toggleDone = useToggle(isDone)
+
+const { toggleDone, isDone } = defineProps(['modelValue', 'toggleDone'])
+const emit = defineEmits(['update:modelValue'])
 
 function closeModal() {
     isOpen.value = false

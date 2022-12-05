@@ -1,17 +1,33 @@
 <script setup>
-import { BoltIcon, SunIcon, PhotoIcon, DocumentTextIcon, SpeakerWaveIcon, SpeakerXMarkIcon, MicrophoneIcon, BoltSlashIcon, EllipsisHorizontalIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/vue/20/solid'
+import { BoltIcon, ArrowRightOnRectangleIcon, CubeTransparentIcon, SunIcon, PhotoIcon, DocumentTextIcon, SpeakerWaveIcon, SpeakerXMarkIcon, MicrophoneIcon, BoltSlashIcon, EllipsisHorizontalIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/vue/20/solid'
 import { BoltIcon as BoltIconOutline } from '@heroicons/vue/24/outline'
 import { useStorage, useDark, useToggle } from '@vueuse/core'
+import { useJwt } from '@vueuse/integrations/useJwt'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import dayjs from 'dayjs'
 
+dayjs.extend(relativeTime)
+
+const router = useRouter()
 const config = useRuntimeConfig()
+const route = useRoute()
 const name = window.location.hostname
 const icon = config.public.pwaManifest.icons[0]
 const size = 12
+
+const auth = useStorage('auth', null)
 const load = useStorage('load', {
     time: Date.now(),
     items: {}
-}, localStorage,
-    { mergeDefaults: true })
+}, localStorage, { mergeDefaults: true })
+
+const user = reactive({
+    name: '',
+    pass: ''
+})
+
+const isDone = ref(false)
+const toggleDone = useToggle(isDone)
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -202,6 +218,25 @@ async function handleBananaImg(e) {
 
 }
 
+const handleEmail = async () => {
+    const url = `https://${config.public.API}.supabase.co/auth/v1/magiclink`
+    const { data, error } = await useFetch(url, {
+        method: 'post',
+        headers: {
+            apikey: config.public.KEY,
+            "Content-Type": "application/json"
+        },
+        body: { email: user.name }
+    })
+    if (!error.message) {
+        // auth.email = body.email
+        console.log('good')
+        return
+    }
+    console.log('bad')
+    // useMagicLogin({})
+}
+
 function handleBanana() {
     console.log('banana')
 }
@@ -216,17 +251,113 @@ function handleBanana() {
     console.log(wicks)
     return wicks
 }) */
+
+onBeforeMount(() => {
+    let author = {}
+
+
+    if (route.hash) {
+        
+        route.hash.split('#')[1].split('&').forEach(entry => {
+            const part = entry.split('=')
+            author[part[0]] = part[1]
+        })
+        author.user = useJwt(author.access_token).payload.value
+        console.log('user', author)
+
+        auth.value = route.hash
+        user.value = author.user
+        router.push('home')
+        /* collectProject({
+            KEN: auth.access_token,
+            KEY: config.public.KEY
+        }) */
+    } 
+
+    else if (auth.value) {
+        auth.value.split('#')[1].split('&').forEach(entry => {
+            const part = entry.split('=')
+            author[part[0]] = part[1]
+        })
+
+        author.user = useJwt(author.access_token).payload.value
+        if( author.user ) {
+            console.log('user', author.user)
+        }
+        
+        // auth.value = route.hash
+    }
+    
+    
+    else {
+        console.log('no block')
+    }
+
+
+    tick.mounting = Date.now()
+})
+
+onMounted(() => {
+    tick.mounted = Date.now()
+    console.log('mounted in', tick.mounted - tick.started, 'ms')
+    /*  draft.title =  draft.content.blocks[0].data.text
+     draft.meta = {
+         description: draft.content.blocks[1].data.text
+     } */
+
+})
 </script>
 <template>
     <cover :class="`uk-background-${isDark ? 'secondary' : 'muted'} uk-position-fixed w-full`"
         v-if="name !== 'localhost'">
 
-        <div v-if="name === 'thismedium.com'">
+        <div
+            v-if="name === 'thismedium.com' || name === '127.0.0.1' || name === '192.168.2.5' || name === '172.20.10.3'">
             <div class="mix-blend-difference flex items-center h-full w-full justify-center">
+                <div :style="`background-image: url('${icon.src}')`" :class="`bg-contain flex flex-column h-9 w-9 '`">
+                </div>
+            </div>
+        </div>
+        <div v-if="name === '192.168.2.5' || name === '172.20.10.3' || 'onceupon.ai'">
+            <ul class="uk-iconnav">
+                <!-- <li><view-focus>
+                <div class="mix-blend-difference flex items-center h-full w-full justify-center">
                         <div :style="`background-image: url('${icon.src}')`"
                             :class="`bg-contain flex flex-column h-9 w-9 '`">
                         </div>
-            </div>
+                </div>
+            </view-focus></li> -->
+                <li v-if="!auth">
+                    <view-focus :toggleDone="toggleDone">
+
+                        <CubeTransparentIcon class="w-9 " />
+                        <template v-slot:header>
+                            <div>Passwordless login</div>
+                        </template>
+                        <template v-slot:tick>
+                            <FormKit v-model="user.name" type="email" placeholder="Enter an email to recieve your link" />
+                        </template>
+                        <template v-slot:tock>
+                            <div>
+                                A link has been sent to the email you provided. Check in a spam
+                                as well for an email from supabase.
+                            </div>
+                        </template>
+                        <template v-slot:primary>
+                            <button type="button" @click="handleEmail"
+                                class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+
+                                Continue
+                            </button>
+                        </template>
+                    </view-focus>
+                </li>
+                <li v-else>
+                    'logged in' as {{ auth }}
+                </li>
+            </ul>
+
+
         </div>
         <div v-else>
             <bolt-icon class="h-20px" />

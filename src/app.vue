@@ -2,8 +2,10 @@
 const config = useRuntimeConfig()
 const icon = config.public.pwaManifest.icons[0]
 const isDark = useDark()
-const { hostname } = useBrowserLocation()
+const { value: { hostname } } = useBrowserLocation()
 const origin = (config.public.HOST === hostname)
+console.log('H', config.public.HOST)
+console.log('h', hostname)
 </script>
 <template>
     <cover :class="`${isDark ? 'uk-background-secondary' : 'bg-gray-300'} uk-position-fixed w-full h-screen`">

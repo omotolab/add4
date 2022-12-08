@@ -1,5 +1,5 @@
 {
-  "name": "Continuity™",
+  "name": "continuity",
   "private": true,
   "scripts": {
     "build": "nuxt build",

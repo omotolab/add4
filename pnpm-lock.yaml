@@ -16,6 +16,8 @@ specifiers:
   nuxt: 3.0.0
   nuxt-windicss: ^2.6.0
   qrcode: ^1.5.1
+  three: ^0.147.0
+  troisjs: ^0.3.4
   uikit: ^3.15.14
 
 dependencies:
@@ -28,6 +30,8 @@ dependencies:
   html5-qrcode: 2.3.4
   jwt-decode: 3.1.2
   qrcode: 1.5.1
+  three: 0.147.0
+  troisjs: 0.3.4
   uikit: 3.15.14
 
 devDependencies:
@@ -5685,6 +5689,10 @@ packages:
       source-map-support: 0.5.21
     dev: true
 
+  /three/0.147.0:
+    resolution: {integrity: sha512-LPTOslYQXFkmvceQjFTNnVVli2LaVF6C99Pv34fJypp8NbQLbTlu3KinZ0zURghS5zEehK+VQyvWuPZ/Sm8fzw==}
+    dev: false
+
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
@@ -5733,6 +5741,10 @@ packages:
   /trim-lines/3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
     dev: true
+
+  /troisjs/0.3.4:
+    resolution: {integrity: sha512-aonG2lw+QyTjytJpvYIaGv2AiIKzm+eSYT4ByG64uVh+jCLAWxnblS6bCewIckvCMqs2j3z351Q/IFIPWYViCQ==}
+    dev: false
 
   /trough/2.1.0:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}

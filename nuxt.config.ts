@@ -3,7 +3,7 @@ import { resolve } from 'path'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 console.log('dev', process.env.NODE_ENV)
 const iconSrc = `//${process.env.BASE_API}.supabase.co/storage/v1/object/public/@/${process.env.BASE_HOST}/icon.png`
-const srcDir = process.env.NODE_ENV !== 'development' ? 'xyz' : 'src'
+const srcDir = process.env.NODE_ENV === 'development' ? 'xyz' : 'src'
 const ssr = process.env.NODE_ENV === 'development' ? true : false
 const runtimeConfig = {
     // The private keys which are only available within server-side

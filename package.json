@@ -4,11 +4,12 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "dev:ssl": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert src/server/config/key/lan.pem --ssl-key src/server/config/key/lan-key.pem",
+    "dev:ssl": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert xyz/server/config/key/lan.pem --ssl-key xyz/server/config/key/lan-key.pem",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "serve": "nuxt generate && node-red -u ."
   },
   "devDependencies": {
     "@kevinmarrec/nuxt-pwa": "^0.13.0",
@@ -27,6 +28,7 @@
     "dayjs": "^1.11.6",
     "html5-qrcode": "^2.3.4",
     "jwt-decode": "^3.1.2",
+    "node-red-auth-github": "github:node-red/node-red-auth-github",
     "qrcode": "^1.5.1",
     "three": "^0.147.0",
     "troisjs": "^0.3.4",

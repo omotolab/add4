@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     srcDir,
     runtimeConfig,
     components,
-    css: ['assets/css/nuxt.css', 'uikit/dist/css/uikit.min.css'],
+    css: ['assets/css/nuxt.css', 'assets/css/theme.css', 'uikit/dist/css/uikit.min.css'],
     modules: [
         '@kevinmarrec/nuxt-pwa',
         '@vueuse/nuxt',

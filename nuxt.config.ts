@@ -1,7 +1,10 @@
 import { resolve } from 'path'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
-console.log('dev', process.env.NODE_ENV)
+
+const account = process.env.account || 'thismedium'
+const project = process.env.project || 'logic.to'
+const imprint = process.env.imprint || 'api:key'
 const iconSrc = `//${process.env.BASE_API}.supabase.co/storage/v1/object/public/@/${process.env.BASE_HOST}/icon.png`
 const srcDir = 'src'
 const ssr = process.env.NODE_ENV === 'development' ? true : false
@@ -36,9 +39,6 @@ const components = {
     ]
 }
 
-const account = process.env.account || 'thismedium'
-const project = process.env.project || 'logic.to'
-const imprint = process.env.imprint || 'api:key'
 
 const isDev = process.env.NODE_ENV === 'development'
 

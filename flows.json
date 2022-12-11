@@ -1,0 +1,2820 @@
+[
+    {
+        "id": "fd06d024121c5978",
+        "type": "tab",
+        "label": "logic.to",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "786a7cdb7fc71ee1",
+        "type": "tab",
+        "label": "/article",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "87c6311723b37392",
+        "type": "tab",
+        "label": "/payment",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9af065fa283c02da",
+        "type": "tab",
+        "label": "Create Moment",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c4ecd0e5fc082584",
+        "type": "tab",
+        "label": "Image",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "965ffd429327b091",
+        "type": "subflow",
+        "name": "Get Text",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": []
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "3cfb52bfece70862",
+        "type": "subflow",
+        "name": "Get Image",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "06a073d05c7f756f",
+        "type": "subflow",
+        "name": "Get Audio",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": []
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ad6f473733d4d9e7",
+        "type": "http request",
+        "z": "965ffd429327b091",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://api.pipeline.ai/v2/runs",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 510,
+        "y": 100,
+        "wires": [
+            [
+                "9b84cf67e86af16c",
+                "a320f3c46e144378"
+            ]
+        ]
+    },
+    {
+        "id": "48457344f5c82285",
+        "type": "http response",
+        "z": "965ffd429327b091",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 880,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a320f3c46e144378",
+        "type": "function",
+        "z": "965ffd429327b091",
+        "name": "function 5",
+        "func": "\nreturn {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        response: msg.payload,\n        request: {\n            uuid: msg.headers['x-request-id'],\n            node: msg.headers['x-node-red-request-node'],\n            date: msg.headers['date'],\n            runtime: msg.payload['compute_time_ms'] / 1000\n        },\n        balance: {\n            reset: 0,\n            limit: 100,\n            remaining: 100,\n        }\n    },\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 100,
+        "wires": [
+            [
+                "48457344f5c82285"
+            ]
+        ]
+    },
+    {
+        "id": "10ac266eacf1e587",
+        "type": "change",
+        "z": "965ffd429327b091",
+        "name": "@input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "prompt",
+                "pt": "msg",
+                "to": "payload.prompt",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"pipeline_id\":\"pipeline_6908d8fb68974c288c69ef45454c8475\",\t   \"data\":[\t       prompt,\t       {\t           \"response_length\": 64,\t           \"include_input\": false,\t           \"temperature\": 1.0,\t           \"top_k\": 50,\t           \"max_time\": 1000\t       }\t    ]\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "input",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 100,
+        "wires": [
+            [
+                "ad6f473733d4d9e7",
+                "c224a2d8504f6376"
+            ]
+        ]
+    },
+    {
+        "id": "d388cb08ab57e984",
+        "type": "http in",
+        "z": "965ffd429327b091",
+        "name": "",
+        "url": "/text/@pipeline",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "10ac266eacf1e587"
+            ]
+        ]
+    },
+    {
+        "id": "fa9cd93b69d03e66",
+        "type": "http request",
+        "z": "965ffd429327b091",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://shared-api.forefront.link/organization/LE6PAqwSG3Rv/gpt-neox-20b-vanilla/completions/8g7cWyM2hCGH",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "95f128fdc06fab1a",
+                "9b84cf67e86af16c"
+            ]
+        ]
+    },
+    {
+        "id": "9867be374590ab6f",
+        "type": "http response",
+        "z": "965ffd429327b091",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 880,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "95f128fdc06fab1a",
+        "type": "function",
+        "z": "965ffd429327b091",
+        "name": "function 6",
+        "func": "\nreturn {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        response: msg.payload,\n        request: {\n            uuid: msg.headers['etag'],\n            node: msg.headers['x-node-red-request-node'],\n            date: msg.headers['date'],\n            runtime: msg.payload['x-envoy-upstream-service-time'] / 1000\n        },\n        balance: {\n            reset: 0,\n            limit: 100,\n            remaining: 100,\n        }\n    },\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 220,
+        "wires": [
+            [
+                "9867be374590ab6f"
+            ]
+        ]
+    },
+    {
+        "id": "7a1081f30309f7c5",
+        "type": "change",
+        "z": "965ffd429327b091",
+        "name": "@input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "prompt",
+                "pt": "msg",
+                "to": "payload.prompt",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"text\": prompt,\t   \"length\": 64,\t   \"include_input\": false,\t   \"temperature\": 1.0,\t   \"top_p\": 1,\t   \"top_k\": 50,\t   \"repitition_penalty\": 1,\t   \"max_time\": 1000,\t   \"num_return_sequences\": 3\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "input",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "fa9cd93b69d03e66",
+                "c224a2d8504f6376"
+            ]
+        ]
+    },
+    {
+        "id": "b9f9025667c2ad8e",
+        "type": "http in",
+        "z": "965ffd429327b091",
+        "name": "",
+        "url": "/text/@forefront",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "7a1081f30309f7c5"
+            ]
+        ]
+    },
+    {
+        "id": "9b84cf67e86af16c",
+        "type": "change",
+        "z": "965ffd429327b091",
+        "name": "@text",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"https://rdwzcfpkxxbixgksgbch.supabase.co/storage/v1/object/open/text/\"&$round($toMillis($now())*$random())&\".json\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "output",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "584aaf1cac9c286e"
+            ]
+        ]
+    },
+    {
+        "id": "584aaf1cac9c286e",
+        "type": "http request",
+        "z": "965ffd429327b091",
+        "name": "/storage",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 880,
+        "y": 160,
+        "wires": [
+            [
+                "2d1d04f3b6bc8ec5"
+            ]
+        ]
+    },
+    {
+        "id": "e507b4cb5774a5ba",
+        "type": "debug",
+        "z": "965ffd429327b091",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2d1d04f3b6bc8ec5",
+        "type": "change",
+        "z": "965ffd429327b091",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 160,
+        "wires": [
+            [
+                "e507b4cb5774a5ba"
+            ]
+        ]
+    },
+    {
+        "id": "c224a2d8504f6376",
+        "type": "debug",
+        "z": "965ffd429327b091",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fb1c8a9f52c66627",
+        "type": "http in",
+        "z": "3cfb52bfece70862",
+        "name": "",
+        "url": "/image/@pexel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "346be1393e471e53"
+            ]
+        ]
+    },
+    {
+        "id": "346be1393e471e53",
+        "type": "http request",
+        "z": "3cfb52bfece70862",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://api.pexels.com/v1/search?query=people",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 80,
+        "wires": [
+            [
+                "8d1e5a930f0b8f6e"
+            ]
+        ]
+    },
+    {
+        "id": "8d1e5a930f0b8f6e",
+        "type": "function",
+        "z": "3cfb52bfece70862",
+        "name": "function 1",
+        "func": "\nreturn {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        response: msg.payload,\n        request: {\n            uuid: msg.headers['x-request-id'],\n            node: msg.headers['x-node-red-request-node'],\n            date: msg.headers['date'],\n            runtime: msg.headers['x-runtime']\n        },\n        balance: {\n            reset: msg.headers['x-ratelimit-reset'],\n            limit: msg.headers['x-ratelimit-limit'],\n            remaining: msg.headers['x-ratelimit-remaining'],\n        }\n    },\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 80,
+        "wires": [
+            [
+                "a54ae8373d4a652e"
+            ]
+        ]
+    },
+    {
+        "id": "f60eab1e94ca41cb",
+        "type": "http request",
+        "z": "3cfb52bfece70862",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://api.pipeline.ai/v2/runs",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "5ec179491bf79300",
+                "d1468fde125234e4",
+                "bb9ffd3407dbf267",
+                "854dcdd86aac4eea"
+            ]
+        ]
+    },
+    {
+        "id": "149ef70400ebf3ef",
+        "type": "http response",
+        "z": "3cfb52bfece70862",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 940,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d1468fde125234e4",
+        "type": "function",
+        "z": "3cfb52bfece70862",
+        "name": "function 3",
+        "func": "\nreturn {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        response: msg.payload,\n        request: {\n            uuid: msg.headers['x-request-id'],\n            node: msg.headers['x-node-red-request-node'],\n            date: msg.headers['date'],\n            runtime: msg.payload['compute_time_ms'] / 1000\n        },\n        balance: {\n            reset: 0,\n            limit: 100,\n            remaining: 100,\n        }\n    },\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 140,
+        "wires": [
+            [
+                "149ef70400ebf3ef"
+            ]
+        ]
+    },
+    {
+        "id": "ea38e3dd9e847684",
+        "type": "change",
+        "z": "3cfb52bfece70862",
+        "name": "@input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "prompt",
+                "pt": "msg",
+                "to": "payload.prompt",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"pipeline_id\":\"pipeline_67d9d8ec36d54c148c70df1f404b0369\",\t   \"data\":[\t       [prompt],\t       {\t           \"num_samples\": 1,\t           \"width\": 1024,\t           \"height\": 670,\t           \"num_inference_steps\": 65,\t           \"guidance_scale\": 7.5\t        }\t    ]\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "input",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "f60eab1e94ca41cb"
+            ]
+        ]
+    },
+    {
+        "id": "c0092e217e66c631",
+        "type": "http in",
+        "z": "3cfb52bfece70862",
+        "name": "",
+        "url": "/image/@pipeline",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "ea38e3dd9e847684"
+            ]
+        ]
+    },
+    {
+        "id": "a54ae8373d4a652e",
+        "type": "http response",
+        "z": "3cfb52bfece70862",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 940,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5423bd8763f542f2",
+        "type": "http request",
+        "z": "3cfb52bfece70862",
+        "name": "/storage",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 940,
+        "y": 200,
+        "wires": [
+            [
+                "d4995f3ded84c622",
+                "03c5406efe595d83",
+                "ec090bad0e991426"
+            ]
+        ]
+    },
+    {
+        "id": "5ec179491bf79300",
+        "type": "change",
+        "z": "3cfb52bfece70862",
+        "name": "@image",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"https://rdwzcfpkxxbixgksgbch.supabase.co/storage/v1/object/open/image/\"&$round($toMillis($now())*$random())&\".json\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "output",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 200,
+        "wires": [
+            [
+                "5423bd8763f542f2"
+            ]
+        ]
+    },
+    {
+        "id": "35c86ec8823adf4f",
+        "type": "debug",
+        "z": "3cfb52bfece70862",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1440,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d4995f3ded84c622",
+        "type": "change",
+        "z": "3cfb52bfece70862",
+        "d": true,
+        "name": "@base",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 200,
+        "wires": [
+            [
+                "35c86ec8823adf4f"
+            ]
+        ]
+    },
+    {
+        "id": "854dcdd86aac4eea",
+        "type": "debug",
+        "z": "3cfb52bfece70862",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8033ad45fd1dbc90",
+        "type": "http request",
+        "z": "3cfb52bfece70862",
+        "name": "[post] /moments",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:8065/hooks/pmctqfh1cb8j8yt6rrdtugu5zc",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1280,
+        "y": 140,
+        "wires": [
+            [
+                "9a80689beeacaf60"
+            ]
+        ]
+    },
+    {
+        "id": "03c5406efe595d83",
+        "type": "change",
+        "z": "3cfb52bfece70862",
+        "d": true,
+        "name": "@bot",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 140,
+        "wires": [
+            [
+                "8033ad45fd1dbc90"
+            ]
+        ]
+    },
+    {
+        "id": "9a80689beeacaf60",
+        "type": "debug",
+        "z": "3cfb52bfece70862",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1440,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a6faa19f34fafcfd",
+        "type": "http request",
+        "z": "3cfb52bfece70862",
+        "name": "/storage",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "133db1aab3cd6cdc",
+                "cdf1b69187bbd866"
+            ]
+        ]
+    },
+    {
+        "id": "bb9ffd3407dbf267",
+        "type": "change",
+        "z": "3cfb52bfece70862",
+        "name": "@image",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"http://192.168.68.103:54323/storage/v1/object/open/image/\"&$round($toMillis($now())*$random())&\".json\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "output",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "a6faa19f34fafcfd"
+            ]
+        ]
+    },
+    {
+        "id": "133db1aab3cd6cdc",
+        "type": "change",
+        "z": "3cfb52bfece70862",
+        "d": true,
+        "name": "@base",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 240,
+        "wires": [
+            [
+                "35c86ec8823adf4f"
+            ]
+        ]
+    },
+    {
+        "id": "cdf1b69187bbd866",
+        "type": "debug",
+        "z": "3cfb52bfece70862",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ec090bad0e991426",
+        "type": "debug",
+        "z": "3cfb52bfece70862",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6a56e180ed054acd",
+        "type": "link in",
+        "z": "3cfb52bfece70862",
+        "name": "image-in",
+        "links": [],
+        "x": 305,
+        "y": 200,
+        "wires": [
+            [
+                "ea38e3dd9e847684"
+            ]
+        ]
+    },
+    {
+        "id": "bf4069698eb94f9a",
+        "type": "http request",
+        "z": "06a073d05c7f756f",
+        "name": "/cognitiveservices",
+        "method": "POST",
+        "ret": "bin",
+        "paytoqs": "query",
+        "url": "https://westeurope.tts.speech.microsoft.com/cognitiveservices/v1",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/ssml+xml"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Ocp-Apim-Subscription-Key",
+                "valueType": "other",
+                "valueValue": "d21c619f8d4d47b682662121812bd996"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "X-Microsoft-OutputFormat",
+                "valueType": "other",
+                "valueValue": "audio-16khz-128kbitrate-mono-mp3"
+            }
+        ],
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "a35a3e71841dba64"
+            ]
+        ]
+    },
+    {
+        "id": "c7df827bf0800846",
+        "type": "http in",
+        "z": "06a073d05c7f756f",
+        "name": "",
+        "url": "/audio/@azure",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "7ef0288283bca7d0"
+            ]
+        ]
+    },
+    {
+        "id": "3887472edf31cce6",
+        "type": "http response",
+        "z": "06a073d05c7f756f",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "040d4cd268d872f0",
+        "type": "http request",
+        "z": "06a073d05c7f756f",
+        "name": "/storage",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 820,
+        "y": 80,
+        "wires": [
+            [
+                "30d20fbeea6a3999"
+            ]
+        ]
+    },
+    {
+        "id": "7ef0288283bca7d0",
+        "type": "change",
+        "z": "06a073d05c7f756f",
+        "name": "@input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "prompt",
+                "pt": "msg",
+                "to": "payload.prompt",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "\"<speak version='1.0' xml:lang='en-GB'><voice xml:lang='en-US' xml:gender='Female' name='en-GB-SoniaNeural'>\"&\tprompt&\"</voice></speak>\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "input",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 80,
+        "wires": [
+            [
+                "bf4069698eb94f9a"
+            ]
+        ]
+    },
+    {
+        "id": "a35a3e71841dba64",
+        "type": "change",
+        "z": "06a073d05c7f756f",
+        "name": "@audio",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"https://rdwzcfpkxxbixgksgbch.supabase.co/storage/v1/object/open/audio/\"&$round($toMillis($now())*$random())&\".mp3\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "output",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "040d4cd268d872f0"
+            ]
+        ]
+    },
+    {
+        "id": "83dbb1ee73146c05",
+        "type": "debug",
+        "z": "06a073d05c7f756f",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "30d20fbeea6a3999",
+        "type": "change",
+        "z": "06a073d05c7f756f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 80,
+        "wires": [
+            [
+                "83dbb1ee73146c05",
+                "3887472edf31cce6"
+            ]
+        ]
+    },
+    {
+        "id": "dd8e11a16722687b",
+        "type": "inject",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "action",
+        "payload": "{\"name\":\"Omotola\"}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 780,
+        "wires": [
+            [
+                "aef7ae1c37d31344"
+            ]
+        ]
+    },
+    {
+        "id": "aef7ae1c37d31344",
+        "type": "function",
+        "z": "fd06d024121c5978",
+        "name": "function 10",
+        "func": "msg.payload = {\n    pin: Math.round(Date.now() * Math.random())\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nconsole.log('Function 1', env.get(\"NR_NODE_ID\"))\nconsole.log('relay', relay)\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n});\nconsole.log('relay', relay)",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 400,
+        "y": 620,
+        "wires": [
+            [
+                "4b1c38af95613e31",
+                "54b899f8a4650745"
+            ]
+        ]
+    },
+    {
+        "id": "25f5132133a50671",
+        "type": "http in",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "url": "/reserve",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 620,
+        "wires": [
+            [
+                "aef7ae1c37d31344",
+                "26dba7b9ce339512"
+            ]
+        ]
+    },
+    {
+        "id": "4b1c38af95613e31",
+        "type": "http response",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "54b899f8a4650745",
+        "type": "debug",
+        "z": "fd06d024121c5978",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "26dba7b9ce339512",
+        "type": "debug",
+        "z": "fd06d024121c5978",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "580e34e01dd4dda3",
+        "type": "inject",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "action",
+        "payload": "{\"name\":\"Omotola\"}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 1080,
+        "wires": [
+            [
+                "c7c40602ef7f7503"
+            ]
+        ]
+    },
+    {
+        "id": "c7c40602ef7f7503",
+        "type": "function",
+        "z": "fd06d024121c5978",
+        "name": "function 11",
+        "func": "msg.payload = {\n    pin: Math.round(Date.now() * Math.random())\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nconsole.log('Function 1', env.get(\"NR_NODE_ID\"))\nconsole.log('relay', relay)\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n});\nconsole.log('relay', relay)",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 400,
+        "y": 920,
+        "wires": [
+            [
+                "5aa7297e7cc0dcd6",
+                "d9fb4bf1c60025d2"
+            ]
+        ]
+    },
+    {
+        "id": "542ab7d194ad821d",
+        "type": "http in",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "url": "/tickets",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 920,
+        "wires": [
+            [
+                "c7c40602ef7f7503",
+                "51a52e0c9758f470"
+            ]
+        ]
+    },
+    {
+        "id": "5aa7297e7cc0dcd6",
+        "type": "http response",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "d9fb4bf1c60025d2",
+        "type": "debug",
+        "z": "fd06d024121c5978",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "51a52e0c9758f470",
+        "type": "debug",
+        "z": "fd06d024121c5978",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "0d4d1569317ed8d1",
+        "type": "http in",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "url": "/io",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "7f81542a30f4aafb"
+            ]
+        ]
+    },
+    {
+        "id": "7f81542a30f4aafb",
+        "type": "function",
+        "z": "fd06d024121c5978",
+        "name": "io",
+        "func": "msg.payload = {\n    tip: 'io',\n    pin: Math.round(Date.now() * Math.random())\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "e4a567fab3e654c1"
+            ]
+        ]
+    },
+    {
+        "id": "e4a567fab3e654c1",
+        "type": "http response",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b0500f4a4e2c4c29",
+        "type": "function",
+        "z": "fd06d024121c5978",
+        "name": "os",
+        "func": "msg.payload = {\n    tip: 'os',\n    pin: Math.round(Date.now() * Math.random())\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "270e79048126a727"
+            ]
+        ]
+    },
+    {
+        "id": "270e79048126a727",
+        "type": "http response",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 350,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "fbb8fa263a4a58f3",
+        "type": "http in",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "url": "/os",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "b0500f4a4e2c4c29"
+            ]
+        ]
+    },
+    {
+        "id": "bae18d798f1fcb9c",
+        "type": "http in",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "url": "/:.",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "bdd27e934cbe062c"
+            ]
+        ]
+    },
+    {
+        "id": "bdd27e934cbe062c",
+        "type": "function",
+        "z": "fd06d024121c5978",
+        "name": ":.",
+        "func": "msg.payload = {\n    top: ':.',\n    pin: Math.round(Date.now() * Math.random())\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "a1c468c29c975de2"
+            ]
+        ]
+    },
+    {
+        "id": "a1c468c29c975de2",
+        "type": "http response",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 350,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "402aad25a7674593",
+        "type": "function",
+        "z": "fd06d024121c5978",
+        "name": "ai",
+        "func": "msg.payload = {\n    tip: 'ai',\n    pin: Math.round(Date.now() * Math.random())\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "7f266a9998266101"
+            ]
+        ]
+    },
+    {
+        "id": "7f266a9998266101",
+        "type": "http response",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 350,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "86bff673c0da8d93",
+        "type": "http in",
+        "z": "fd06d024121c5978",
+        "name": "",
+        "url": "/ai",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 120,
+        "wires": [
+            [
+                "402aad25a7674593"
+            ]
+        ]
+    },
+    {
+        "id": "30af5b4a6bae96dd",
+        "type": "http in",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "url": "/",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 60,
+        "wires": [
+            [
+                "7e70a523e303b2ae"
+            ]
+        ]
+    },
+    {
+        "id": "1c03e0427c3c70ca",
+        "type": "http response",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 760,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "598a9f0398236a5e",
+        "type": "function",
+        "z": "786a7cdb7fc71ee1",
+        "name": "article",
+        "func": "msg.payload = {\n    tip: 'article',\n    pin: Math.round(Date.now() * Math.random()),\n    data: msg.payload\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 410,
+        "y": 40,
+        "wires": [
+            [
+                "68cbe25b2a2e9d96",
+                "3d9608caaba5d845",
+                "1c03e0427c3c70ca"
+            ]
+        ]
+    },
+    {
+        "id": "7e70a523e303b2ae",
+        "type": "switch",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "article",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 60,
+        "wires": [
+            [
+                "598a9f0398236a5e"
+            ],
+            [
+                "930be8fadb960417"
+            ]
+        ]
+    },
+    {
+        "id": "8978c58a628d5476",
+        "type": "http response",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "statusCode": "412",
+        "headers": {},
+        "x": 760,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "930be8fadb960417",
+        "type": "function",
+        "z": "786a7cdb7fc71ee1",
+        "name": ":.",
+        "func": "msg.payload = {\n    tip: 'article',\n    pin: Math.round(Date.now() * Math.random()),\n    data: msg.payload\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 410,
+        "y": 80,
+        "wires": [
+            [
+                "8978c58a628d5476",
+                "3d9608caaba5d845"
+            ]
+        ]
+    },
+    {
+        "id": "68cbe25b2a2e9d96",
+        "type": "http request",
+        "z": "786a7cdb7fc71ee1",
+        "d": true,
+        "name": "[post] /api/stream",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "/api/stream",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 40,
+        "wires": [
+            [
+                "1c03e0427c3c70ca"
+            ]
+        ]
+    },
+    {
+        "id": "a563d9b97a496010",
+        "type": "http in",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "url": "/",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 220,
+        "wires": [
+            [
+                "1ad3b2c71ad34438"
+            ]
+        ]
+    },
+    {
+        "id": "507369124073d693",
+        "type": "http response",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 740,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ca2398370931ad57",
+        "type": "function",
+        "z": "786a7cdb7fc71ee1",
+        "name": "article",
+        "func": "msg.payload = {\n    tip: 'article',\n    pin: Math.round(Date.now() * Math.random()),\n    data: msg.payload\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "05fa876bb89d1eab",
+                "4ca643994244ae19",
+                "507369124073d693"
+            ]
+        ]
+    },
+    {
+        "id": "1ad3b2c71ad34438",
+        "type": "switch",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "article",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "ca2398370931ad57"
+            ],
+            [
+                "3c2e3d1ed52e625d"
+            ]
+        ]
+    },
+    {
+        "id": "65bdb03de91eba19",
+        "type": "http response",
+        "z": "786a7cdb7fc71ee1",
+        "name": "",
+        "statusCode": "412",
+        "headers": {},
+        "x": 740,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "3c2e3d1ed52e625d",
+        "type": "function",
+        "z": "786a7cdb7fc71ee1",
+        "name": ":.",
+        "func": "msg.payload = {\n    tip: 'article',\n    pin: Math.round(Date.now() * Math.random()),\n    data: msg.payload\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n/* console.log('10', env.get(\"NR_NODE_ID\"))\nrelay.init({\n    host: \"192.168.2.5\", // A host name used by the server to publish it's state to the graph. Set your peer URL without a protocol, like  'relay.some-site.com'\n    port: 1880, // Gun server port. You may use a more standard 8080.\n    store: false, // Put true if you want to have Gun store data on disk.\n    // path: \"./public\", // A public directory to expose your app with the build in express server. Insert a path like '../demo/dist'\n}); */\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "relay",
+                "module": "@gun-vue/relay"
+            }
+        ],
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "65bdb03de91eba19",
+                "4ca643994244ae19"
+            ]
+        ]
+    },
+    {
+        "id": "05fa876bb89d1eab",
+        "type": "http request",
+        "z": "786a7cdb7fc71ee1",
+        "d": true,
+        "name": "[get] /api/stream",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "stream",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 560,
+        "y": 200,
+        "wires": [
+            [
+                "507369124073d693"
+            ]
+        ]
+    },
+    {
+        "id": "4ca643994244ae19",
+        "type": "debug",
+        "z": "786a7cdb7fc71ee1",
+        "name": "debug 25",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3d9608caaba5d845",
+        "type": "debug",
+        "z": "786a7cdb7fc71ee1",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "21274da6f068736b",
+        "type": "function",
+        "z": "87c6311723b37392",
+        "name": "function 2",
+        "func": "msg.payload = {\n    description: msg.payload.name,\n    redirectUrl: 'http://localhost:1880?payment=1234',\n    amount: { \n        currency: \"EUR\", \n        value: \"0.01\" \n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 60,
+        "wires": [
+            [
+                "e28a4365d9fcca88"
+            ]
+        ]
+    },
+    {
+        "id": "ece1cb8c84faacb5",
+        "type": "http in",
+        "z": "87c6311723b37392",
+        "name": "",
+        "url": "payment",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "21274da6f068736b"
+            ]
+        ]
+    },
+    {
+        "id": "e28a4365d9fcca88",
+        "type": "http request",
+        "z": "87c6311723b37392",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.mollie.com/v2/payment-links",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "5a5bd6ecbf92a7d4"
+            ]
+        ]
+    },
+    {
+        "id": "5a5bd6ecbf92a7d4",
+        "type": "function",
+        "z": "87c6311723b37392",
+        "name": "function 12",
+        "func": "msg.payload = {\n    query: msg.payload,\n    now: Date.now(),\n    at: '127.0.0.1:1880/api/admin'\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 60,
+        "wires": [
+            [
+                "7dbd2a0ebb09d90e"
+            ]
+        ]
+    },
+    {
+        "id": "7dbd2a0ebb09d90e",
+        "type": "http response",
+        "z": "87c6311723b37392",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1fde418be6a51c25",
+        "type": "http in",
+        "z": "9af065fa283c02da",
+        "name": "",
+        "url": "...",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "944549e0effb605b",
+                "dc94c9202950de7d"
+            ]
+        ]
+    },
+    {
+        "id": "944549e0effb605b",
+        "type": "subflow:965ffd429327b091",
+        "z": "9af065fa283c02da",
+        "name": "Get Text",
+        "x": 280,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6a3b97d0093fe9d3",
+        "type": "subflow:3cfb52bfece70862",
+        "z": "9af065fa283c02da",
+        "name": "Get Image",
+        "x": 290,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "dc94c9202950de7d",
+        "type": "subflow:06a073d05c7f756f",
+        "z": "9af065fa283c02da",
+        "name": "Get Audio",
+        "x": 280,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3d0cab09e7cfcab9",
+        "type": "http in",
+        "z": "c4ecd0e5fc082584",
+        "name": "",
+        "url": "/image/@pexel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "9bd006fe75b08965",
+                "24eca3cba78d2f65"
+            ]
+        ]
+    },
+    {
+        "id": "9bd006fe75b08965",
+        "type": "http request",
+        "z": "c4ecd0e5fc082584",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://api.pexels.com/v1/search?query=people",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 540,
+        "y": 40,
+        "wires": [
+            [
+                "3b2af18ddb226b02"
+            ]
+        ]
+    },
+    {
+        "id": "3b2af18ddb226b02",
+        "type": "function",
+        "z": "c4ecd0e5fc082584",
+        "name": "function 7",
+        "func": "\nreturn {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        response: msg.payload,\n        request: {\n            uuid: msg.headers['x-request-id'],\n            node: msg.headers['x-node-red-request-node'],\n            date: msg.headers['date'],\n            runtime: msg.headers['x-runtime']\n        },\n        balance: {\n            reset: msg.headers['x-ratelimit-reset'],\n            limit: msg.headers['x-ratelimit-limit'],\n            remaining: msg.headers['x-ratelimit-remaining'],\n        }\n    },\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 40,
+        "wires": [
+            [
+                "de44a9c5778f6602"
+            ]
+        ]
+    },
+    {
+        "id": "3dd5d175c8bc62c1",
+        "type": "http request",
+        "z": "c4ecd0e5fc082584",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://api.pipeline.ai/v2/runs",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 540,
+        "y": 100,
+        "wires": [
+            [
+                "93e31a440e21f166",
+                "fe884b18a068f2f9",
+                "9de62626d08b244c",
+                "da9fa2aae1a8d09d"
+            ]
+        ]
+    },
+    {
+        "id": "083773a365ca7116",
+        "type": "http response",
+        "z": "c4ecd0e5fc082584",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 890,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "fe884b18a068f2f9",
+        "type": "function",
+        "z": "c4ecd0e5fc082584",
+        "name": "function 8",
+        "func": "\nreturn {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        response: msg.payload,\n        request: {\n            uuid: msg.headers['x-request-id'],\n            node: msg.headers['x-node-red-request-node'],\n            date: msg.headers['date'],\n            runtime: msg.payload['compute_time_ms'] / 1000\n        },\n        balance: {\n            reset: 0,\n            limit: 100,\n            remaining: 100,\n        }\n    },\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 100,
+        "wires": [
+            [
+                "083773a365ca7116"
+            ]
+        ]
+    },
+    {
+        "id": "b5498a1fd05d176b",
+        "type": "change",
+        "z": "c4ecd0e5fc082584",
+        "name": "@input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "prompt",
+                "pt": "msg",
+                "to": "payload.prompt",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"pipeline_id\":\"pipeline_67d9d8ec36d54c148c70df1f404b0369\",\t   \"data\":[\t       [prompt],\t       {\t           \"num_samples\": 1,\t           \"width\": 1024,\t           \"height\": 670,\t           \"num_inference_steps\": 65,\t           \"guidance_scale\": 7.5\t        }\t    ]\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "input",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "3dd5d175c8bc62c1"
+            ]
+        ]
+    },
+    {
+        "id": "0e25adead7171409",
+        "type": "http in",
+        "z": "c4ecd0e5fc082584",
+        "name": "",
+        "url": "/image/@pipeline",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "b5498a1fd05d176b"
+            ]
+        ]
+    },
+    {
+        "id": "de44a9c5778f6602",
+        "type": "http response",
+        "z": "c4ecd0e5fc082584",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 890,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "67275cf0cdb3b22a",
+        "type": "http request",
+        "z": "c4ecd0e5fc082584",
+        "name": "/storage",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 890,
+        "y": 160,
+        "wires": [
+            [
+                "3633f352e9cd5a10",
+                "14fb73fa19d5205c",
+                "7f08d40e7e915308"
+            ]
+        ]
+    },
+    {
+        "id": "93e31a440e21f166",
+        "type": "change",
+        "z": "c4ecd0e5fc082584",
+        "name": "@image",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"https://rdwzcfpkxxbixgksgbch.supabase.co/storage/v1/object/open/image/\"&$round($toMillis($now())*$random())&\".json\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "output",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 160,
+        "wires": [
+            [
+                "67275cf0cdb3b22a"
+            ]
+        ]
+    },
+    {
+        "id": "127f6a8da9904635",
+        "type": "debug",
+        "z": "c4ecd0e5fc082584",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3633f352e9cd5a10",
+        "type": "change",
+        "z": "c4ecd0e5fc082584",
+        "d": true,
+        "name": "@base",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 160,
+        "wires": [
+            [
+                "127f6a8da9904635"
+            ]
+        ]
+    },
+    {
+        "id": "da9fa2aae1a8d09d",
+        "type": "debug",
+        "z": "c4ecd0e5fc082584",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8f5c196ccd0cadc3",
+        "type": "http request",
+        "z": "c4ecd0e5fc082584",
+        "name": "[post] /moments",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:8065/hooks/pmctqfh1cb8j8yt6rrdtugu5zc",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1230,
+        "y": 100,
+        "wires": [
+            [
+                "375983a56d1ab5fe"
+            ]
+        ]
+    },
+    {
+        "id": "14fb73fa19d5205c",
+        "type": "change",
+        "z": "c4ecd0e5fc082584",
+        "d": true,
+        "name": "@bot",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 100,
+        "wires": [
+            [
+                "8f5c196ccd0cadc3"
+            ]
+        ]
+    },
+    {
+        "id": "375983a56d1ab5fe",
+        "type": "debug",
+        "z": "c4ecd0e5fc082584",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "010148dc35d533b4",
+        "type": "http request",
+        "z": "c4ecd0e5fc082584",
+        "name": "/storage",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "1c5a021ee4ac8878",
+                "75cd12b5d1a092a0"
+            ]
+        ]
+    },
+    {
+        "id": "9de62626d08b244c",
+        "type": "change",
+        "z": "c4ecd0e5fc082584",
+        "name": "@image",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"http://192.168.68.103:54323/storage/v1/object/open/image/\"&$round($toMillis($now())*$random())&\".json\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "output",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "010148dc35d533b4"
+            ]
+        ]
+    },
+    {
+        "id": "1c5a021ee4ac8878",
+        "type": "change",
+        "z": "c4ecd0e5fc082584",
+        "d": true,
+        "name": "@base",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"input\": input,\t   \"output\": output,\t   \"reference\": payload.Key\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "input",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "output",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "prompt",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 200,
+        "wires": [
+            [
+                "127f6a8da9904635"
+            ]
+        ]
+    },
+    {
+        "id": "75cd12b5d1a092a0",
+        "type": "debug",
+        "z": "c4ecd0e5fc082584",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7f08d40e7e915308",
+        "type": "debug",
+        "z": "c4ecd0e5fc082584",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "24eca3cba78d2f65",
+        "type": "debug",
+        "z": "c4ecd0e5fc082584",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 240,
+        "wires": []
+    }
+]

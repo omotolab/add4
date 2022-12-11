@@ -16,21 +16,46 @@ const runtimeConfig = {
         HOST: process.env.BASE_HOST,
         API: process.env.BASE_API,
         KEY: process.env.BASE_KEY,
-    }
+    },
+    SUPABASE_API: imprint.split(':')[0],
+    SUPABASE_KEY: imprint.split(':')[1],
+    /* public: {
+      account: process.env.account || 'thismedium',
+      project: process.env.project || 'thismedium.com',
+    } */
 }
 
 const components = {
     dirs: [
-      {
-        "path": "@@/src-nuxt/components",
-        "global": true
-      },
-      "@@/xyz/atoms",
-      "~/atoms"
+        {
+            "path": "@@/src-nuxt/components",
+            "global": true
+        },
+        "@@/xyz/atoms",
+        "~/atoms"
     ]
 }
 
+const account = process.env.account || 'thismedium'
+const project = process.env.project || 'logic.to'
+const imprint = process.env.imprint || 'api:key'
+
+const isDev = process.env.NODE_ENV === 'development'
+
+
 export default defineNuxtConfig({
+    app: {
+        pageTransition: { name: 'page', mode: 'out-in' },
+        layoutTransition: { name: 'layout', mode: 'out-in' },
+        head: {
+            title: process.env.NODE_ENV !== 'production' ? `@${account}/${project}` : `${project}`,
+            link: [
+                {
+                    rel: 'icon', type: 'image/png', href: '/images/icon.png',
+                },
+            ],
+        },
+    },
     ssr,
     srcDir,
     runtimeConfig,
@@ -39,6 +64,7 @@ export default defineNuxtConfig({
     modules: [
         '@kevinmarrec/nuxt-pwa',
         '@vueuse/nuxt',
+        '@nuxtjs/i18n',
         '@formkit/nuxt',
         '@nuxt/content',
         'nuxt-windicss'
@@ -46,10 +72,26 @@ export default defineNuxtConfig({
     build: {
         transpile: ['troisjs']
     },
+    i18n: {
+        locales: ['en', 'nl'],
+        defaultLocale: 'en',
+        vueI18n: {
+            locale: 'nl', // set locale
+            fallbackLocale: 'en', // set fallback locale
+            messages: {
+                en: {
+                    hello: 'hello world'
+                },
+                nl: {
+                    hello: 'hallo wereld'
+                }
+            }
+        }
+    },
 
-    /* build: {
-        transpile: ['troisjs']
-    }, */
+    telemetry: false,
+    // srcDir: `${process.cwd()}/:./@`,
+    // buildDir: `${process.cwd()}/:./@${account}/${project}/build`,
 
 
     /* Module Settings */
@@ -70,13 +112,19 @@ export default defineNuxtConfig({
             fileName: 'mountain-icon-png.png'
         }, */
         icon: false,
+        meta: {
+            name: 'Continuity',
+            appleStatusBarStyle: 'white',
+            theme_color: '#fff',
+            viewport: 'width=device-width, initial-scale=1, maximum-scale=1'
+        },
         manifest: {
             name: process.env.BASE_NAME,
             lang: 'en',
             useWebmanifestExtension: false,
             icons: [{
-                    src: iconSrc,
-                    sizes: "72x72 96x96 128x128 256x256 512x512"
+                src: iconSrc,
+                sizes: "72x72 96x96 128x128 256x256 512x512"
             }]
         }
     }

@@ -89,7 +89,7 @@ module.exports = {
     adminAuth: require('node-red-auth-github')({
         clientID: GITHUB_CLIENT_ID,
         clientSecret: GITHUB_CLIENT_SECRET,
-        baseURL: "http://localhost:1880/",
+        baseURL: "http://192.168.2.5:1880/admin/",
         users: [
            { username: "omotolab", permissions: ["*"]},
            { username: "missmarcus", permissions: ["*"]}
@@ -179,7 +179,7 @@ module.exports = {
      * The following property can be used to specify a different root path.
      * If set to false, this is disabled.
      */
-    httpAdminRoot: '/admin',
+    httpAdminRoot: '/app',
 
     /** The following property can be used to add a custom middleware function
      * in front of all admin http routes. For example, to set custom http

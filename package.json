@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "node .output/server/index.mjs",
-    "serve": "nuxt generate && node-red -u ."
+    "serve:dist": "nuxt generate && node-red -u .",
+    "serve": "node-red -u ."
   },
   "devDependencies": {
     "@kevinmarrec/nuxt-pwa": "^0.13.0",

@@ -1,0 +1,95 @@
+uid: signs
+title: 2Tango Signs
+description: AI Assisted Communication
+[sections]
+    id: 0
+    heading: 2Tango Signs
+    lead: AI Assisted Communication
+    backgroundimage: url(/images/www/crayons.jpg)
+    logo: /images/www/logo.png
+
+    id: 1
+    heading: Who We Help
+    [.list]
+        title: For You
+        content: /md/individual.md
+        image: /images/www/individuals.svg
+
+        title: For Work/Organisations
+        content: /md/workorganisations.md
+        image: /images/www/work2.svg
+
+        title: For Your Partner/Best Friend
+        content: /md/partnerbestfriend.md
+        image: /images/www/individuals.svg
+
+        title: For School/Teachers
+        content: /md/schoolteachers.md
+        image: /images/www/home.svg
+    []
+
+    id: 2
+    heading: The Signs System
+    backgroundcolor: #46a748
+    [.list]
+        title: The Signs Language
+        content: /md/signslanguage.md
+        image: /images/www/language2.svg
+
+        title: The Signs Messenger
+        content:/md/signsmessenger.md
+        image: /images/www/message3.svg
+
+        title: The Signs Assistant
+        content: /md/signsassistant.md 
+        image: /images/www/assistant2.svg
+    []
+
+    id: 3
+    heading: Clarify
+    description: Create summaries of your communication
+    image: /images/www/clarify.svg
+    [.list] 
+        title: Live Suggestions
+        content: /md/clarify1.md
+        
+        title: Template & Automate
+        content: /md/clarify2.md 
+        
+        title: See Your Progress
+        content: /md/clarify3.md
+    []
+
+    id: 4
+    heading: Become An Alpha Tester!
+    image: /images/logoDev.png
+    description: #earlyapadopters
+    backgroundimage: url(/images/www/hand.jpg)
+    format: forms
+    [.list]
+        title: Careeers
+        description: careers@2tango.org
+        image: /images/www/careers.svg
+        
+
+        title: Research
+        description: Research@2tango.org
+        image: /images/www/research.svg
+        
+
+        title: Press
+        description: Press@2tango.org
+        image: /images/www/media.svg
+         
+
+        title: Referral
+        description: 
+        image: /images/www/referral.svg
+       
+
+        title: Partners
+        description: Partners@2tango.org
+        image: /images/www/partners.svg
+        [] 
+    []
+  

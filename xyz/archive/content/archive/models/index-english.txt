@@ -1,0 +1,156 @@
+uid: signs
+title: The Universal Remote for Communicating
+description: This is a story about a decentralised networking protocol for preserving privacy.
+
+[sections]
+    heading: 2Tango Signs™
+    lead: AI-Assisted tools for autism friendly communication & collaboration.
+    image: /images/logo.png
+    backgroundimage: url(/images/www/crayons.jpg)
+    format: hero
+ 
+    heading: Who We Help
+    format: panel
+    [.list]
+        title: For You
+        content: /md/individual.md
+        id: individual
+
+        title: For Work/Organisations
+        content: /md/workorganisations.md
+        id: works
+
+        title: For Your Partner/Best Friend
+        content: /md/partnerbestfriend.md
+        id: friend
+
+        title: For School/Teachers
+        content: /md/schoolteachers.md
+        id: teacher
+    []
+
+    heading: The Signs™ System
+    backgroundcolor: #46a748
+    format: tabs
+    [.list] 
+        title: The Signs™ Language
+        description: Communicate without speaking. The Signs Language uses symbols/signs/gestures for communication anywhere, anytime with anyone.  
+        image: /images/www/language2.svg
+        id: language
+
+        title: The Signs™ Messenger
+        description:Send and receive the Signs Language digitally. The Signs Messenger helps you find the right words, no matter your style, speed or state.
+        image: /images/www/message2.svg
+        id: messenger
+
+        title: The Signs™ Assistant
+        description: Your digital friend who takes the care of the details for you. The Signs Assistant helps you focus on the moment, instead of planning and managing it.
+        image: /images/www/assistant2.svg
+        id: assitant
+    []
+
+    heading: The Signs™ Controller
+    lead: With our universal remote system, we can turn our ordinary objects into virtual devices.adding the capability for physical gestures to prompt/perform tasks/commands.
+    format: grid
+    size: 4
+    [.list]
+        title: The Signs™ Remote for Phone
+        image: /images/www/phone.svg
+        id: phone
+        
+        title: The Signs™ Remote for Laptop
+        image: /images/www/laptop.svg
+        id: laptop
+        
+        title: The Signs™ Remote for Watch
+        image: /images/www/watch.svg
+        id: watch
+        
+        title: The Signs™ Remote for TV 
+        image: /images/www/tv.svg
+        id: tv
+    []
+
+    heading: 2Tango Signs™ | Clarify System
+    lead: Explore features of Signs™ Clarify
+    format: cards
+    [.list]
+        title: Live Suggestions
+        content: /md/clarify1.md
+        image: /images/www/clarify.svg
+        id: clarify
+        
+        title: Template & Automate
+        content: /md/clarify2.md 
+        image: /images/www/quickdraw.svg
+        id: quickdraw
+        
+        title: See Your Progress
+        content: /md/clarify3.md
+        image: /images/www/fortress.svg
+        id: fortress
+    []
+
+    heading: Become an Alpha Tester!
+    lead: #earlyadopters
+    image: /images/logoDev.png
+    backgroundimage: url(/images/www/hand.jpg)
+    format: forms
+    [.list]
+        title: Individual
+        description: http://eepurl.com/gmol3L
+        link: http://eepurl.com/gmol3L
+        image: /images/www/individuals.svg
+        id: individual
+        format:
+
+        title: Careers
+        description: careers@2tango.org
+        image: /images/www/work2.svg
+        id: careers
+        format: 
+
+        title: Research
+        description: research@2tango.org
+        image: /images/www/research.svg\
+        id: research
+        format: 
+
+        title: Organization
+        description: Receive their name, title, email and organization
+        image: /images/www/organizations.svg
+        id: organization
+        format: 
+
+        title: Partners
+        description: partners@2tango.org
+        image: /images/www/partners.svg
+        id: partners
+        format: 
+
+        title: Press
+        description: press@2tango.org
+        image: /images/www/media.svg
+        id: press
+        format: 
+
+        title: Referral
+        description: @2tango.org
+        image: /images/www/referral.svg
+        id: referral
+        format: 
+    [] 
+
+
+
+    []
+
+    title: Use Cases & Stories
+    description: Signs™ at Home Signs™ in Motion Signs™ at Work
+    image: /images/logo.png
+    format: 
+    
+    title: Pricing
+    description: 
+    image: /images/logo.png
+    format:  

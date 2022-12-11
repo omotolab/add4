@@ -1,0 +1,13 @@
+.cdx-marker {
+    background: rgba(27, 190, 27, 0.29);
+    padding: 3px 0;
+  }
+
+  .simple-image img {
+    max-width: 100%;
+    margin-bottom: 15px;
+}
+
+.codex-editor__redactor {
+  padding-bottom: 100px !important;
+}
